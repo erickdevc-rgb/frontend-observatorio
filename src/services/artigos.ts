@@ -1,17 +1,18 @@
-const url: string =
-  "http://localhost:8080/bibliographic_production_researcher?terms=&researcher_id=&type=ARTICLE&qualis=&year=";
+const url: string = "http://127.0.0.1:8000/producoes";
 
 const getArtigos = async () => {
   const resposta = await fetch(url, {
     method: "GET",
-    mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-store" // Garante dados atualizados
   });
+
   if (!resposta.ok) {
-    throw new Error("Nao foi possivel buscar os artigos");
+    throw new Error("Não foi possível buscar as produções");
   }
+
   return resposta.json();
 };
 

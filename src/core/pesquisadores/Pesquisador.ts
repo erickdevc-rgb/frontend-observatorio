@@ -1,8 +1,6 @@
-interface Pesquisador {
-  name: string;
+export interface Pesquisador {
+  pesquisadores_id: string; // <-- Ajustado para bater com o banco de dados
+  nome: string;
   lattes_id: string;
-  abstract: string;
-  articles: number;
+  instituicao?: string;
 }
-
-export default Pesquisador;
