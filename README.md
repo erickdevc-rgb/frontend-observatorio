@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Observatório SIMCC - Plataforma com Inteligência Artificial
 
-## Getting Started
+Este projeto foi desenvolvido como parte do desafio técnico para o Observatório SIMCC. A plataforma consiste num sistema Full-Stack que gere pesquisadores e produções científicas, integrado a um motor de Inteligência Artificial (RAG) para buscas semânticas em linguagem natural.
 
-First, run the development server:
+## 🚀 Tecnologias Utilizadas
 
+**Back-end:**
+* **Python & FastAPI**: Criação da API RESTful de alta performance.
+* **PostgreSQL + pgvector**: Banco de dados relacional e armazenamento vetorial.
+* **LangChain & OpenAI**: Engenharia de Prompt e Embeddings (text-embedding-3-small / gpt-3.5-turbo).
+
+**Front-end:**
+* **Next.js (App Router) & React**: Renderização Server-Side (SSR) e Client-Side.
+* **Tailwind CSS**: Estilização da interface.
+* **react-markdown**: Renderização de respostas geradas pela IA.
+
+## ✨ Funcionalidades Entregues
+
+1. **CRUD de Pesquisadores e Produções**: Endpoints completos geridos no FastAPI.
+2. **Integração Qualis (CAPES)**: Cruzamento de dados nativo no PostgreSQL utilizando `LEFT JOIN` pelo ISSN.
+3. **Assistente Virtual IA**: Rota `/busca-ia` que converte a pergunta do utilizador em vetores, busca os artigos mais semanticamente próximos no banco de dados e formula uma resposta contextualizada baseada APENAS nos dados retornados.
+4. **Server-Side Filtering**: Filtro de artigos em tempo real otimizado, processando a carga de busca e limitação (LIMIT) diretamente no banco de dados via URL Search Params.
+
+## ⚙️ Como executar o projeto localmente
+
+### 1. Banco de Dados
+Certifique-se de ter o PostgreSQL instalado com a extensão `pgvector` ativa. Crie o banco de dados e ajuste a `CONNECTION_STRING` no arquivo `main.py`.
+
+### 2. Back-end (API)
+Abra um terminal na pasta do backend:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Ative o ambiente virtual
+source venv/bin/activate  # (Linux/Mac/WSL) ou venv\Scripts\activate (Windows)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Instale as dependências (FastAPI, Langchain, psycopg2, etc)
+pip install -r requirements.txt
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Inicie o servidor
+uvicorn main:app --reload
