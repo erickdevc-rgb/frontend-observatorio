@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { perguntarAoAssistente } from "@/services/ia";
 
 export default function AssistenteIA() {
@@ -49,9 +50,13 @@ export default function AssistenteIA() {
 
             {/* Caixa de Resposta da IA */}
             {resposta && (
-                <div className="bg-slate-200 text-black p-6 rounded-md shadow-lg border-l-4 border-blue-600">
-                    <h2 className="text-lg font-bold text-slate-800 mb-2">Resposta da IA:</h2>
-                    <p className="leading-relaxed whitespace-pre-wrap">{resposta}</p>
+                <div className="bg-slate-200 text-black p-6 rounded-md shadow-lg border-l-4 border-blue-600 mt-8">
+                    <h2 className="text-lg font-bold text-slate-800 mb-4">Resposta da IA:</h2>
+                    
+                    {/* A div recebe o className, e o ReactMarkdown fica "limpo" por dentro */}
+                    <div className="leading-relaxed text-slate-700 space-y-4">
+                        <ReactMarkdown>{resposta}</ReactMarkdown>
+                    </div>
                 </div>
             )}
         </div>
