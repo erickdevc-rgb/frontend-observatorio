@@ -17,6 +17,9 @@ export default function Menu() {
                 <MenuItem link="/artigos">
                     Artigos
                 </MenuItem>
+                    <MenuItem link="/assistente">
+                    Assistente IA
+                </MenuItem>
             </ul>
 
         </div>

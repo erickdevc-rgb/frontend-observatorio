@@ -1,16 +1,18 @@
 import getArtigos from "@/services/artigos";
 import ListaArtigos from "@/components/ListaArtigos";
 
-export default async function Artigos() {
-    // A página (Server Component) faz o "fetch" pesado
-    const artigos = await getArtigos();
+// O Next.js injeta os searchParams (a URL) diretamente no Server Component
+export default async function Artigos({ searchParams }: { searchParams: { busca?: string } }) {
+    
+    // Repassa a palavra da URL para a nossa API em Python
+    const artigos = await getArtigos(searchParams.busca);
 
     return (
         <div>
-            <h1 className="text-2xl font-bold text-white mb-7">Artigos</h1>
+            <h1 className="text-2xl font-bold text-white mb-7">Artigos Científicos</h1>
             
-            {/* Passamos os dados para o Client Component fazer a renderização interativa */}
-            <ListaArtigos artigosIniciais={artigos} />
+            {/* O componente agora só desenha o que o banco devolveu */}
+            <ListaArtigos artigos={artigos} />
         </div>
     );
 }
